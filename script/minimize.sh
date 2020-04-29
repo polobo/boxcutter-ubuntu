@@ -4,8 +4,7 @@ if [[ "$DESKTOP" =~ ^(true|yes|on|1|TRUE|YES|ON])$ ]]; then
   exit
 fi
 
-echo "==> Disk usage before minimization"
-df -h
+DISK_USAGE_BEFORE_MINIMIZATION=$(df -h)
 
 echo "==> Installed packages before cleanup"
 dpkg --get-selections | grep -v deinstall
@@ -57,5 +56,8 @@ find /var/cache -type f -exec rm -rf {} \;
 # delete any logs that have built up during the install
 find /var/log/ -name *.log -exec rm -f {} \;
 
-echo "==> Disk usage after cleanup"
+echo "==> Disk usage before minimization"
+echo "$DISK_USAGE_BEFORE_MINIMIZATION"
+
+echo "==> Disk usage after minimization"
 df -h
