@@ -2,12 +2,12 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-    config.vm.define "vagrant-ubuntu1404-desktop"
-    config.vm.box = "ubuntu1404-desktop"
- 
+    config.vm.define "vagrant-ubuntu-desktop"
+    config.vm.box = "ubuntu-desktop"
+
     config.vm.provider :virtualbox do |v, override|
         v.gui = true
-        v.customize ["modifyvm", :id, "--memory", 1024]
+        v.customize ["modifyvm", :id, "--memory", 16000]
         v.customize ["modifyvm", :id, "--cpus", 1]
         v.customize ["modifyvm", :id, "--vram", "256"]
         v.customize ["setextradata", "global", "GUI/MaxGuestResolution", "any"]
@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
       config.vm.provider provider do |v, override|
         v.gui = true
         v.vmx["memsize"] = "1024"
-        v.vmx["numvcpus"] = "1"
+        v.vmx["numvcpus"] = "4"
         v.vmx["cpuid.coresPerSocket"] = "1"
         v.vmx["RemoteDisplay.vnc.enabled"] = "false"
         v.vmx["RemoteDisplay.vnc.port"] = "5900"

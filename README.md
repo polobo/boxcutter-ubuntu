@@ -4,72 +4,69 @@
 
 This repository contains [Packer](https://packer.io/) templates for creating Ubuntu Vagrant boxes written in legacy JSON.
 
+## Development Versioning Information
+
+Please see the files under development-environments for published combinations used during the
+development and testing of patches for this repository.
+
 ## Current Boxes
 
 We no longer provide pre-built binaries for these templates.
 
 ## Building the Vagrant boxes with Packer
 
-To build all the boxes, you will need [VirtualBox](https://www.virtualbox.org/wiki/Downloads), 
-[VMware Fusion](https://www.vmware.com/products/fusion)/[VMware Workstation](https://www.vmware.com/products/workstation) and
-[Parallels](http://www.parallels.com/products/desktop/whats-new/) installed.
+We make use of HCL files containing user variables to build specific versions of Ubuntu.
+You tell `packer` to use a specific user variable file via the `-var-file=` command line
+option.  This will override the default options on the core `ubuntu.json` packer template,
+which builds Ubuntu 20.04 by default.
+
+The general form for the `packer build` command is:
+```
+    packer build \
+        [-only=<template-type>] \
+        [-var-file=ubuntu-add-desktop.pkvars.hcl] \
+        -var-file=ubuntu{release}.pkvars.hcl \
+        -var="version={yyyymmdd-n}" \
+        build-ubuntu
+```
+
+The boxcutter templates currently support the following desktop virtualization (template-type above) strings:
+
+* `parallels-iso.ubuntu` - [Parallels](http://www.parallels.com/products/desktop/whats-new/) desktop virtualization (Requires the Pro Edition - Desktop edition won't work)
+* `virtualbox-iso.ubuntu` - [VirtualBox](https://www.virtualbox.org/wiki/Downloads) desktop virtualization
+* `vmware-iso.ubuntu` - [VMware Fusion](https://www.vmware.com/products/fusion) or [VMware Workstation](https://www.vmware.com/products/workstation) desktop virtualization
 
 Parallels requires that the
 [Parallels Virtualization SDK for Mac](http://www.parallels.com/downloads/desktop)
 be installed as an additional prerequisite.
 
-We make use of JSON files containing user variables to build specific versions of Ubuntu.
-You tell `packer` to use a specific user variable file via the `-var-file=` command line
-option.  This will override the default options on the core `ubuntu.json` packer template,
-which builds Ubuntu 20.04 by default.
+If no single template type is specified the builder will attempt to build out all the desktop virtualization
+products listed above and will fail if those applications have not been installed.
 
-For example, to build Ubuntu 20.04, use the following:
+### Variable overrides
 
-    $ packer build -var-file=ubuntu2004.json ubuntu.json
-    
-If you want to make boxes for a specific desktop virtualization platform, use the `-only`
-parameter.  For example, to build Ubuntu 20.04 for VirtualBox:
+There are two files the define the variables that the user is permitted
+(but not enforced) to change at the `packer` command-line.
 
-    $ packer build -only=virtualbox-iso -var-file=ubuntu2004.json ubuntu.json
+* build-ubuntu/vars-interactive.pkr.hcl
+* build-ubuntu/vars-vm-default.pkr.hcl
 
-The boxcutter templates currently support the following desktop virtualization strings:
+A third file should be referenced if the virtual machine will require
+a network proxy.
 
-* `parallels-iso` - [Parallels](http://www.parallels.com/products/desktop/whats-new/) desktop virtualization (Requires the Pro Edition - Desktop edition won't work)
-* `virtualbox-iso` - [VirtualBox](https://www.virtualbox.org/wiki/Downloads) desktop virtualization
-* `vmware-iso` - [VMware Fusion](https://www.vmware.com/products/fusion) or [VMware Workstation](https://www.vmware.com/products/workstation) desktop virtualization
+* build-ubuntu/vars-proxy.pkr.hcl
 
-## Building the Vagrant boxes with the box script
+The only required variable, as noted above, is "version".
 
-We've also provided a wrapper script `bin/box` for ease of use, so alternatively, you can use
-the following to build Ubuntu 20.04 for all providers:
-
-    $ bin/box build ubuntu2004
-
-Or if you just want to build Ubuntu 20.04 for VirtualBox:
-
-    $ bin/box build ubuntu2004 virtualbox
-
-## Building the Vagrant boxes with the Makefile
-
-A GNU Make `Makefile` drives a complete basebox creation pipeline with the following stages:
-
-* `build` - Create basebox `*.box` files
-* `assure` - Verify that the basebox `*.box` files produced function correctly
-* `deliver` - Upload `*.box` files to [Artifactory](https://www.jfrog.com/confluence/display/RTF/Vagrant+Repositories), [Atlas](https://atlas.hashicorp.com/) or an [S3 bucket](https://aws.amazon.com/s3/)
-
-The pipeline is driven via the following targets, making it easy for you to include them
-in your favourite CI tool:
-
-    make build   # Build all available box types
-    make assure  # Run tests against all the boxes
-    make deliver # Upload box artifacts to a repository
-    make clean   # Clean up build detritus
+The variables representing the primary non-root user and its password are
+presently local variables due to the `http/user-data` file being a
+non-template with those values hard-coded.
 
 ### Proxy Settings
 
 The templates respect the following network proxy environment variables
 and forward them on to the virtual machine environment during the box creation
-process, should you be using a proxy:
+process.
 
 * http_proxy
 * https_proxy
@@ -83,58 +80,6 @@ Automated tests are written in [Serverspec](http://serverspec.org) and require
 the `vagrant-serverspec` plugin to be installed with:
 
     vagrant plugin install vagrant-serverspec
-
-The `bin/box` script has subcommands for running both the automated tests
-and for performing exploratory testing.
-
-Use the `bin/box test` subcommand to run the automated Serverspec tests.
-For example to execute the tests for the Ubuntu 20.04 box on VirtualBox, use
-the following:
-
-    bin/box test ubuntu2004 virtualbox
-
-Similarly, to perform exploratory testing on the VirtualBox image via ssh,
-run the following command:
-
-    bin/box ssh ubuntu2004 virtualbox
-
-### Variable overrides
-
-There are several variables that can be used to override some of the default
-settings in the box build process. The variables can that can be currently
-used are:
-
-* cpus
-* disk_size
-* memory
-* update
-
-The variable `HEADLESS` can be set to run Packer in headless mode.
-Set `HEADLESS := true`, the default is false.
-
-The variable `UPDATE` can be used to perform OS patch management.  The
-default is to not apply OS updates by default.  When `UPDATE := true`,
-the latest OS updates will be applied.
-
-The variable `PACKER` can be used to set the path to the packer binary.
-The default is `packer`.
-
-The variable `ISO_PATH` can be used to set the path to a directory with
-OS install images. This override is commonly used to speed up Packer builds
-by pointing at pre-downloaded ISOs instead of using the default download
-Internet URLs.
-
-The variables `SSH_USERNAME` and `SSH_PASSWORD` can be used to change the
- default name & password from the default `vagrant`/`vagrant` respectively.
-
-The variable `INSTALL_VAGRANT_KEY` can be set to turn off installation of the
-default insecure vagrant key when the image is being used outside of vagrant.
-Set `INSTALL_VAGRANT_KEY := false`, the default is true.
-
-The variable `CUSTOM_SCRIPT` can be used to specify a custom script
-to be executed. You can add it to the `script/custom` directory (content
-is ignored by Git).
-The default is `custom-script.sh` which does nothing.
 
 ## Contributing
 

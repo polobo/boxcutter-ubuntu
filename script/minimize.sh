@@ -4,14 +4,13 @@ if [[ "$DESKTOP" =~ ^(true|yes|on|1|TRUE|YES|ON])$ ]]; then
   exit
 fi
 
-echo "==> Disk usage before minimization"
-df -h
+DISK_USAGE_BEFORE_MINIMIZATION=$(df -h)
 
 echo "==> Installed packages before cleanup"
 dpkg --get-selections | grep -v deinstall
 
 # Remove some packages to get a minimal install
-echo "==> Removing all linux kernels except the currrent one"
+echo "==> Removing all linux kernels except the current one"
 dpkg --list | awk '{ print $2 }' | grep -e 'linux-\(headers\|image\)-.*[0-9]\($\|-generic\)' | grep -v "$(uname -r | sed 's/-generic//')" | xargs apt-get -y purge
 echo "==> Removing linux source"
 dpkg --list | awk '{ print $2 }' | grep linux-source | xargs apt-get -y purge
@@ -57,5 +56,8 @@ find /var/cache -type f -exec rm -rf {} \;
 # delete any logs that have built up during the install
 find /var/log/ -name *.log -exec rm -f {} \;
 
-echo "==> Disk usage after cleanup"
+echo "==> Disk usage before minimization"
+echo "$DISK_USAGE_BEFORE_MINIMIZATION"
+
+echo "==> Disk usage after minimization"
 df -h
