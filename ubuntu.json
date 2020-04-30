@@ -175,8 +175,9 @@
       ],
       "execute_command": "echo '{{ user `ssh_password` }}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
       "scripts": [
-        "script/desktop.sh",
         "script/upgrade-release.sh",
+        "script/upgrade-existing.sh",
+        "script/desktop.sh",
         "script/vagrant.sh",
         "script/sshd.sh",
         "script/vmware.sh",
