@@ -14,7 +14,7 @@ echo "==> Updating list of repositories"
 # apt-get update does not actually perform updates, it just downloads and indexes the list of packages
 apt-get -y update
 
-if [[ $UPDATE  =~ true || $UPDATE =~ 1 || $UPDATE =~ yes ]]; then
+if [[ $UPGRADE_RELEASE  =~ true || $UPGRADE_RELEASE =~ 1 || $UPGRADE_RELEASE =~ yes ]]; then
     echo "==> Performing dist-upgrade (all packages and kernel)"
     apt-get -y dist-upgrade --force-yes
     reboot
