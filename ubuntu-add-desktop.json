@@ -1,7 +1,7 @@
 {
   "_comment": "Build with `packer build -var=\"version={yyyymmdd-n}\" -var-file=ubuntu{release}.json -var-file=ubuntu-add-desktop.json ubuntu.json`",
-  "vm_name": "ubuntu-desktop2004",
   "desktop": "true",
+  "interactive_mode": "desktop",
   "vagrantfile_template": "tpl/vagrantfile-ubuntu-desktop.tpl",
   "disk_size": "130048",
   "cpus": "4"
