@@ -2,8 +2,8 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-    config.vm.define "vagrant-ubuntu1804-desktop"
-    config.vm.box = "ubuntu1804-desktop"
+    config.vm.define "vagrant-ubuntu-desktop"
+    config.vm.box = "ubuntu-desktop"
 
     config.vm.provider :virtualbox do |v, override|
         v.gui = true
