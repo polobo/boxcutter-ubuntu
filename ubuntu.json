@@ -168,7 +168,7 @@
     "install_vagrant_key": "true",
     "iso_path": "/Volumes/Storage/software/ubuntu",
     "locale": "en_US.UTF-8",
-    "memory": "512",
+    "memory": "1024",
     "no_proxy": "{{env `no_proxy`}}",
     "parallels_guest_os_type": "ubuntu",
     "rsync_proxy": "{{env `rsync_proxy`}}",
