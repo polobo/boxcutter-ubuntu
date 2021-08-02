@@ -178,7 +178,7 @@
     "ssh_username": "vagrant",
     "upgrade_release": "false",
     "vagrantfile_template": "",
-    "version": "unversioned",
+    "version": "donotuse",
     "virtualbox_guest_os_type": "Ubuntu_64",
     "vmware_guest_os_type": "ubuntu-64"
   }

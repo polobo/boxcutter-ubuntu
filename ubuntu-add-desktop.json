@@ -1,5 +1,5 @@
 {
-  "_comment": "Build with `packer build -var-file=ubuntu{version}.json -var-file=ubuntu-add-desktop.json ubuntu.json`",
+  "_comment": "Build with `packer build -var=\"version={yyyymmdd-n}\" -var-file=ubuntu{release}.json -var-file=ubuntu-add-desktop.json ubuntu.json`",
   "vm_name": "ubuntu-desktop2004",
   "desktop": "true",
   "vagrantfile_template": "tpl/vagrantfile-ubuntu-desktop.tpl",
