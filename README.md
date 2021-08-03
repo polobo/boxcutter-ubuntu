@@ -20,17 +20,10 @@ be installed as an additional prerequisite.
 
 We make use of JSON files containing user variables to build specific versions of Ubuntu.
 You tell `packer` to use a specific user variable file via the `-var-file=` command line
-option.  This will override the default options on the core `ubuntu.json` packer template,
-which builds Ubuntu 18.04 by default.
+option.
 
-For example, to build Ubuntu 18.04, use the following:
-
-    $ packer build -var-file=ubuntu1804.json ubuntu.json
-    
-If you want to make boxes for a specific desktop virtualization platform, use the `-only`
-parameter.  For example, to build Ubuntu 18.04 for VirtualBox:
-
-    $ packer build -only=virtualbox-iso -var-file=ubuntu1804.json ubuntu.json
+The general form for the `packer build` command is:
+    packer build [-only=<template-type>] -var="version={yyyymmdd-n} -var-file=ubuntu{release}.json [-var-file=ubuntu-add-desktop.json] ubuntu.json
 
 The boxcutter templates currently support the following desktop virtualization strings:
 
