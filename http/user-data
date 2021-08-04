@@ -13,6 +13,8 @@ autoinstall:
         dhcp-identifier: mac
   ssh:
     install-server: true
+  apt:
+    geoip: false
   packages:
     - build-essential
     - perl
