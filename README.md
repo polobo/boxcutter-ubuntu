@@ -2,7 +2,7 @@
 
 ### Overview
 
-This repository contains [Packer](https://packer.io/) templates for creating Ubuntu Vagrant boxes in legacy JSON.
+This repository contains [Packer](https://packer.io/) templates for creating Ubuntu Vagrant boxes
 
 ## Current Boxes
 
@@ -18,12 +18,12 @@ Parallels requires that the
 [Parallels Virtualization SDK for Mac](http://www.parallels.com/downloads/desktop)
 be installed as an additional prerequisite.
 
-We make use of JSON files containing user variables to build specific versions of Ubuntu.
+We make use of HCL files containing user variables to build specific versions of Ubuntu.
 You tell `packer` to use a specific user variable file via the `-var-file=` command line
 option.
 
 The general form for the `packer build` command is:
-    packer build [-only=<template-type>] -var="version={yyyymmdd-n} -var-file=ubuntu{release}.json [-var-file=ubuntu-add-desktop.json] ubuntu.json
+    packer build [-only=<template-type>] -var="version={yyyymmdd-n} -var-file=ubuntu{release}.json [-var-file=ubuntu-add-desktop.json] build-ubuntu
 
 The boxcutter templates currently support the following desktop virtualization strings:
 
@@ -111,11 +111,6 @@ the latest OS updates will be applied.
 
 The variable `PACKER` can be used to set the path to the packer binary.
 The default is `packer`.
-
-The variable `ISO_PATH` can be used to set the path to a directory with
-OS install images. This override is commonly used to speed up Packer builds
-by pointing at pre-downloaded ISOs instead of using the default download
-Internet URLs.
 
 The variables `SSH_USERNAME` and `SSH_PASSWORD` can be used to change the
  default name & password from the default `vagrant`/`vagrant` respectively.
