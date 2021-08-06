@@ -1,5 +1,9 @@
 source "vmware-iso" "ubuntu" {
-  boot_command           = ["${var.boot_command_prefix}", "${var.boot_subiquity}", "${var.boot_command_suffix}"]
+  boot_command = [
+    "${var.boot_command_prefix}",
+    "${var.boot_subiquity}",
+    "${var.boot_command_suffix}"
+  ]
   boot_wait              = "5s"
   disk_size              = "${var.disk_size}"
   guest_os_type          = "${var.vmware_guest_os_type}"
