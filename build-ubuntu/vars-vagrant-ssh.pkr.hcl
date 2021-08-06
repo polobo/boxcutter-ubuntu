@@ -13,6 +13,16 @@ variable "ssh_username" {
   default = "vagrant"
 }
 
+variable "ssh_handshake_attempts" {
+  type    = string
+  default = "20"
+}
+
+variable "ssh_wait_timeout" {
+  type    = string
+  default = "10000s"
+}
+
 variable "install_vagrant_key" {
   type    = string
   default = "true"

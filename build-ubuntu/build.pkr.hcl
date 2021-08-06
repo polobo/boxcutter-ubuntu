@@ -4,7 +4,6 @@ build {
     "source.virtualbox-iso.ubuntu",
     "source.vmware-iso.ubuntu"
   ]
-
   provisioner "shell" {
     environment_vars = [
       "CLEANUP_PAUSE=${var.cleanup_pause}",

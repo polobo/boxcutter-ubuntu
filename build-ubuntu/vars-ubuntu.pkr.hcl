@@ -1,16 +1,21 @@
-variable "boot_command_prefix" {
-  type    = string
-  default = "<enter><enter><f6><esc><wait>"
+local "boot_command_array" {
+  expression = [
+    "<enter><enter><f6><esc><wait>",
+    "autoinstall ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/",
+    "<wait><enter>"
+  ]
 }
 
-variable "boot_subiquity" {
-  type    = string
-  default = "autoinstall ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/"
+local "boot_wait" {
+  expression = "5s"
 }
 
-variable "boot_command_suffix" {
-  type    = string
-  default = "<wait><enter>"
+local "repo_http_dir" {
+  expression = "http"
+}
+
+local "shutdown_command" {
+  expression = "echo '${var.ssh_password}'|sudo -S shutdown -P now"
 }
 
 variable "cleanup_pause" {
