@@ -12,5 +12,5 @@ build {
     keep_input_artifact  = false
     output               = "box/<no value>/${var.vm_name}-${var.interactive_mode}-${var.version}.box"
     vagrantfile_template = "${var.vagrantfile_template}"
-  }    
+  }
 }

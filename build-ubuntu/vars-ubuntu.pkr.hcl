@@ -19,7 +19,7 @@ variable "cleanup_pause" {
 }
 
 variable "vm_name" {
-  type    = string
+  type = string
 }
 
 variable "hostname" {
@@ -38,15 +38,15 @@ variable "interactive_mode" {
 }
 
 variable "version" {
-  type    = string
+  type = string
 }
 
 variable "iso_checksum" {
-  type    = string
+  type = string
 }
 
 variable "iso_url" {
-  type    = string
+  type = string
 }
 
 variable "upgrade_release" {
