@@ -8,7 +8,7 @@ build {
     environment_vars = [
       "CLEANUP_PAUSE=${var.cleanup_pause}",
       "DEBIAN_FRONTEND=noninteractive",
-      "DESKTOP=${var.desktop}",
+      "DESKTOP=${local.desktop}",
       "UPGRADE_RELEASE=${var.upgrade_release}",
       "INSTALL_VAGRANT_KEY=${var.install_vagrant_key}",
       "SSH_USERNAME=${var.ssh_username}",
