@@ -1,5 +1,6 @@
+#!/bin/bash -eux
 
-# Seems redundant with the contents of the preseed file...but leaving for now...
+# TODO: Should be doable via the http/user-data file but do it here for now.
 echo "==> Disabling periodic apt upgrades"
 echo 'APT::Periodic::Enable "0";' >> /etc/apt/apt.conf.d/10periodic
 

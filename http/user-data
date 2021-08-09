@@ -3,6 +3,7 @@ autoinstall:
   version: 1
   identity:
     hostname: vagrant
+    # openssl passwd -6 -salt iCc.WH.j vagrant
     password: '$6$iCc.WH.j$EuCSsvXtnIX2UnrunKZHApB3uvKuxplkAL1UBtBkab047y/jyn9WnpVAkc57jtqSv.hsLGje.milvneydC.Cw/'
     username: vagrant
   network:
@@ -13,14 +14,19 @@ autoinstall:
         dhcp-identifier: mac
   ssh:
     install-server: true
+  # Install hangs after failure for mirror server geoip lookup is performed
+  # So we just don't use a mirror for now.
   apt:
     geoip: false
   packages:
     - build-essential
     - perl
   late-commands:
+    # Setup our vagrant user to have sudo powers during install only
+    # The provisioner will still need to grant them these powers permanently
     - 'echo "vagrant        ALL=(ALL)       NOPASSWD: ALL" > /target/etc/sudoers.d/vagrant'
     - chmod 440 /target/etc/sudoers.d/vagrant
+    # Install the linux-headers-* package here, instead of in packages, so that we can query the release name
     - apt-get -y install linux-headers-$(uname -r)
   locale: en_US.UTF-8
   keyboard:

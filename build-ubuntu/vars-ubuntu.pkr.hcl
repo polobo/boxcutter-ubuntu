@@ -63,3 +63,8 @@ variable "locale" {
   type    = string
   default = "en_US.UTF-8"
 }
+
+variable "headless" {
+  type    = string
+  default = "true"
+}

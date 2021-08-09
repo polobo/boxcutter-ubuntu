@@ -26,7 +26,7 @@ build {
       "script/upgrade-existing.sh",
       "script/desktop.sh",
       "script/vagrant.sh",
-      "script/sshd.sh",
+      "script/sshd-disable-dns.sh",
       "script/vmware.sh",
       "script/virtualbox.sh",
       "script/parallels.sh",

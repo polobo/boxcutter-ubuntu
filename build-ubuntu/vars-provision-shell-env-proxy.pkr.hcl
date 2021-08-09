@@ -1,8 +1,3 @@
-variable "headless" {
-  type    = string
-  default = "true"
-}
-
 variable "ftp_proxy" {
   type    = string
   default = "${env("ftp_proxy")}"
