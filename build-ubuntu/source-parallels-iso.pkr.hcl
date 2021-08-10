@@ -14,10 +14,10 @@ source "parallels-iso" "ubuntu" {
   output_directory       = "${local.parallels_output_dir}"
 
   shutdown_command       = "${local.shutdown_command}"
-  ssh_handshake_attempts = "${var.ssh_handshake_attempts}"
+  ssh_handshake_attempts = "${local.ssh_handshake_attempts}"
   ssh_password           = "${var.ssh_password}"
   ssh_username           = "${var.ssh_username}"
-  ssh_wait_timeout       = "${var.ssh_wait_timeout}"
+  ssh_wait_timeout       = "${local.ssh_wait_timeout}"
 
   prlctl = [
     ["set", "{{ .Name }}", "--memsize", "${var.memory}"],

@@ -6,13 +6,12 @@ build {
   ]
   provisioner "shell" {
     environment_vars = [
-      "CLEANUP_PAUSE=${var.cleanup_pause}",
+      "CLEANUP_PAUSE=${local.cleanup_pause}",
       "DEBIAN_FRONTEND=noninteractive",
       "DESKTOP=${local.desktop}",
-      "UPGRADE_RELEASE=${var.upgrade_release}",
       "INSTALL_VAGRANT_KEY=${var.install_vagrant_key}",
-      "SSH_USERNAME=${var.ssh_username}",
-      "SSH_PASSWORD=${var.ssh_password}",
+      "SSH_USERNAME=${local.ssh_username}",
+      "SSH_PASSWORD=${local.ssh_password}",
       "http_proxy=${var.http_proxy}",
       "https_proxy=${var.https_proxy}",
       "ftp_proxy=${var.ftp_proxy}",
@@ -20,10 +19,10 @@ build {
       "no_proxy=${var.no_proxy}"
     ]
     expect_disconnect = "true"
-    execute_command   = "echo '${var.ssh_password}' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'"
+    execute_command   = "echo '${local.ssh_password}' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'"
     scripts = [
-      "script/upgrade-release.sh",
-      "script/upgrade-existing.sh",
+      "script/disable-upgrade-release.sh",
+      "script/always-upgrade-existing.sh",
       "script/desktop.sh",
       "script/vagrant.sh",
       "script/sshd-disable-dns.sh",

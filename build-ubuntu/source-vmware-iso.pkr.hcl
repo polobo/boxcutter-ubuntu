@@ -13,10 +13,10 @@ source "vmware-iso" "ubuntu" {
   iso_urls               = ["${var.iso_url}"]
   output_directory       = "${local.vmware_output_dir}"
   shutdown_command       = "${local.shutdown_command}"
-  ssh_handshake_attempts = "${var.ssh_handshake_attempts}"
-  ssh_password           = "${var.ssh_password}"
-  ssh_timeout            = "${var.ssh_wait_timeout}"
+  ssh_handshake_attempts = "${local.ssh_handshake_attempts}"
   ssh_username           = "${var.ssh_username}"
+  ssh_password           = "${var.ssh_password}"
+  ssh_timeout            = "${local.ssh_wait_timeout}"
 
   vmx_remove_ethernet_interfaces = true
   vmx_data = {

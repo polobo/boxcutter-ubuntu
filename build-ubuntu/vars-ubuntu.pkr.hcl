@@ -10,12 +10,17 @@ local "boot_wait" {
   expression = "5s"
 }
 
-local "repo_http_dir" {
-  expression = "http"
+local "cleanup_pause" {
+  type    = string
+  default = ""
 }
 
 local "shutdown_command" {
   expression = "echo '${var.ssh_password}'|sudo -S shutdown -P now"
+}
+
+local "repo_http_dir" {
+  expression = "http"
 }
 
 local "desktop" {
@@ -27,18 +32,8 @@ local "desktop" {
   expression = "${var.interactive_mode == "desktop" ? true : false}"
 }
 
-variable "cleanup_pause" {
-  type    = string
-  default = ""
-}
-
 variable "vm_name" {
   type = string
-}
-
-variable "hostname" {
-  type    = string
-  default = "vagrant"
 }
 
 variable "interactive_mode" {
@@ -52,29 +47,17 @@ EOD
   default = "server"
 }
 
-variable "version" {
-  type = string
-}
-
 variable "iso_checksum" {
+  description = "Non-Interactive, see ubuntu{version}.pkvars.hcl"
   type = string
 }
 
 variable "iso_url" {
+  description = "Non-Interactive, see ubuntu{version}.pkvars.hcl"
   type = string
 }
 
-variable "upgrade_release" {
+variable "vagrantfile_template" {
   type    = string
-  default = "false"
-}
-
-variable "locale" {
-  type    = string
-  default = "en_US.UTF-8"
-}
-
-variable "headless" {
-  type    = string
-  default = "true"
+  default = ""
 }

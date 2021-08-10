@@ -1,0 +1,6 @@
+* Ubuntu 20.04.2 w/ Desktop Install
+* Packer: 1.7.4
+* Vagrant: 2.2.18
+* Oracle VM VirtualBox: Windows 10 - 6.1.26 r145957 (Qt5.6.2)
+* Parallels: Not Tested
+* VMware Fusion: Not Tested
