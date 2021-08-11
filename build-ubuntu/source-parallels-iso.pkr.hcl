@@ -15,8 +15,8 @@ source "parallels-iso" "ubuntu" {
 
   shutdown_command       = "${local.shutdown_command}"
   ssh_handshake_attempts = "${local.ssh_handshake_attempts}"
-  ssh_password           = "${var.ssh_password}"
-  ssh_username           = "${var.ssh_username}"
+  ssh_password           = "${local.ssh_password}"
+  ssh_username           = "${local.ssh_username}"
   ssh_wait_timeout       = "${local.ssh_wait_timeout}"
 
   prlctl = [

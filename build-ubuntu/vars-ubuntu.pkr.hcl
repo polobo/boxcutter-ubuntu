@@ -11,12 +11,11 @@ local "boot_wait" {
 }
 
 local "cleanup_pause" {
-  type    = string
-  default = ""
+  expression = ""
 }
 
 local "shutdown_command" {
-  expression = "echo '${var.ssh_password}'|sudo -S shutdown -P now"
+  expression = "echo '${local.ssh_password}'|sudo -S shutdown -P now"
 }
 
 local "repo_http_dir" {

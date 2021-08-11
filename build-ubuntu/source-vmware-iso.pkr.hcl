@@ -14,8 +14,8 @@ source "vmware-iso" "ubuntu" {
   output_directory       = "${local.vmware_output_dir}"
   shutdown_command       = "${local.shutdown_command}"
   ssh_handshake_attempts = "${local.ssh_handshake_attempts}"
-  ssh_username           = "${var.ssh_username}"
-  ssh_password           = "${var.ssh_password}"
+  ssh_username           = "${local.ssh_username}"
+  ssh_password           = "${local.ssh_password}"
   ssh_timeout            = "${local.ssh_wait_timeout}"
 
   vmx_remove_ethernet_interfaces = true

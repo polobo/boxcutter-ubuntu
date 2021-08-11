@@ -11,7 +11,7 @@ source "virtualbox-iso" "ubuntu" {
   shutdown_command       = "${local.shutdown_command}"
 
   guest_os_type          = "${local.virtualbox_guest_os_type}"
-  headless               = "${var.headless}"
+  headless               = "true" # Attempt to run with display failed.  Fix the value to true until that is resolved.
   http_directory         = "${local.repo_http_dir}"
 
   iso_checksum           = "${var.iso_checksum}"
@@ -20,8 +20,8 @@ source "virtualbox-iso" "ubuntu" {
   output_directory       = "${local.virtualbox_output_dir}"
 
   ssh_handshake_attempts = "${local.ssh_handshake_attempts}"
-  ssh_password           = "${var.ssh_password}"
-  ssh_username           = "${var.ssh_username}"
+  ssh_password           = "${local.ssh_password}"
+  ssh_username           = "${local.ssh_username}"
   ssh_wait_timeout       = "${local.ssh_wait_timeout}"
 
   disk_size              = "${var.disk_size}"

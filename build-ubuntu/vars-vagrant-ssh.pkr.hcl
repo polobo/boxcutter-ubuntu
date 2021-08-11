@@ -9,11 +9,9 @@ local "ssh_password" {
 }
 
 local "ssh_handshake_attempts" {
-  type    = string
-  default = "20"
+  expression = "200"
 }
 
 local "ssh_wait_timeout" {
-  type    = string
-  default = "10000s"
+  expression = "10000s"
 }

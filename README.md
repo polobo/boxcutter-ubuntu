@@ -23,17 +23,17 @@ The general form for the `packer build` command is:
 ```
     packer build \
         [-only=<template-type>] \
-        [-var-file=ubuntu-add-desktop.json] \
-        -var-file ubuntu{release}.json \
+        [-var-file=ubuntu-add-desktop.pkvars.hcl] \
+        -var-file ubuntu{release}.pkvars.hcl \
         -var "version={yyyymmdd-n} \
         build-ubuntu
 ```
 
 The boxcutter templates currently support the following desktop virtualization (template-type above) strings:
 
-* `parallels-iso` - [Parallels](http://www.parallels.com/products/desktop/whats-new/) desktop virtualization (Requires the Pro Edition - Desktop edition won't work)
-* `virtualbox-iso` - [VirtualBox](https://www.virtualbox.org/wiki/Downloads) desktop virtualization
-* `vmware-iso` - [VMware Fusion](https://www.vmware.com/products/fusion) or [VMware Workstation](https://www.vmware.com/products/workstation) desktop virtualization
+* `parallels-iso.ubuntu` - [Parallels](http://www.parallels.com/products/desktop/whats-new/) desktop virtualization (Requires the Pro Edition - Desktop edition won't work)
+* `virtualbox-iso.ubuntu` - [VirtualBox](https://www.virtualbox.org/wiki/Downloads) desktop virtualization
+* `vmware-iso.ubuntu` - [VMware Fusion](https://www.vmware.com/products/fusion) or [VMware Workstation](https://www.vmware.com/products/workstation) desktop virtualization
 
 Parallels requires that the
 [Parallels Virtualization SDK for Mac](http://www.parallels.com/downloads/desktop)
