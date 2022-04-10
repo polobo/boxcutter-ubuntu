@@ -1,3 +1,3 @@
 vm_name = "ubuntu2004"
-iso_checksum = "sha256:d1f2bf834bbe9bb43faf16f9be992a6f3935e65be0edece1dee2aa6eb1767423"
-iso_url = "http://releases.ubuntu.com/20.04/ubuntu-20.04.2-live-server-amd64.iso"
+iso_checksum = "sha256:28ccdb56450e643bad03bb7bcf7507ce3d8d90e8bf09e38f6bd9ac298a98eaad"
+iso_url = "http://releases.ubuntu.com/20.04/ubuntu-20.04-4-live-server-amd64.iso"
