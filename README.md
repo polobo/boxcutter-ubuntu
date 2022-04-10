@@ -24,8 +24,8 @@ The general form for the `packer build` command is:
     packer build \
         [-only=<template-type>] \
         [-var-file=ubuntu-add-desktop.pkvars.hcl] \
-        -var-file ubuntu{release}.pkvars.hcl \
-        -var "version={yyyymmdd-n} \
+        -var-file=ubuntu{release}.pkvars.hcl \
+        -var="version={yyyymmdd-n}" \
         build-ubuntu
 ```
 
@@ -57,7 +57,7 @@ a network proxy.
 
 The only required variable, as noted above, is "version".
 
-The variables representing the primary non-root and its password are
+The variables representing the primary non-root user and its password are
 presently local variables due to the `http/user-data` file being a
 non-template with those values hard-coded.
 
