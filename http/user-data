@@ -14,10 +14,7 @@ autoinstall:
         dhcp-identifier: mac
   ssh:
     install-server: true
-  # Install hangs after failure for mirror server geoip lookup is performed
-  # So we just don't use a mirror for now.
-  apt:
-    geoip: false
+
   packages:
     - build-essential
     - perl

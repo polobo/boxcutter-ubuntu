@@ -1,8 +1,8 @@
-* Ubuntu 20.04.2 w/ Desktop Install
+* Ubuntu 20.04.4 w/ Desktop Install
 * Packer: 1.7.4
 * Vagrant: 2.2.18
 * Oracle VM VirtualBox: Windows 10 - 6.1.26 r145957 (Qt5.6.2)
 * Parallels: Not Tested
 * VMware Fusion: Not Tested
 
-Same Setup Re-Built 2022-04-08; Positive Outcome
+Unlike with 20.04.2, where I had to disabled geoip, for this build a disabled geoip caused issues.
